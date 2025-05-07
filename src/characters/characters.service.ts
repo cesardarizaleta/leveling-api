@@ -1,26 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCharacterDto } from './dto/create-character.dto';
 import { UpdateCharacterDto } from './dto/update-character.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Character } from './entities/character.entity';
 
 @Injectable()
 export class CharactersService {
-  create(createCharacterDto: CreateCharacterDto) {
-    return 'This action adds a new character';
-  }
+  constructor(
+    @InjectRepository(Character)
+    private characterRepository: Repository<Character>,
+  ) {}
 
-  findAll() {
-    return `This action returns all characters`;
+  findAll(): Promise<Character[]> {
+    return this.characterRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} character`;
-  }
-
-  update(id: number, updateCharacterDto: UpdateCharacterDto) {
-    return `This action updates a #${id} character`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} character`;
+    return this.characterRepository.findOneBy({ id });
   }
 }

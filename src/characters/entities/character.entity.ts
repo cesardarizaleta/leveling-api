@@ -1,5 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-
 @Entity()
 export class Character {
   @PrimaryGeneratedColumn()
@@ -10,4 +9,10 @@ export class Character {
 
   @Column()
   age: number;
+
+  @Column()
+  abilities: string;
+
+  @Column()
+  image: string;
 }

@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCharacterDto } from './dto/create-character.dto';
-import { UpdateCharacterDto } from './dto/update-character.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Character } from './entities/character.entity';
@@ -16,7 +14,7 @@ export class CharactersService {
     return this.characterRepository.find();
   }
 
-  findOne(id: number) {
+  findOne(id: number): Promise<Character | null> {
     return this.characterRepository.findOneBy({ id });
   }
 }
